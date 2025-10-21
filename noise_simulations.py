@@ -40,7 +40,7 @@ band_w = (taus >= 0.2) & (taus <= 1.0) & np.isfinite(adev_white)
 scale_white = np.nanmedian( (N_arw/np.sqrt(taus[band_w])) / adev_white[band_w] )
 white = scale_white * white_unit
 
-#### Bias-instability, scale to sigma0 in mid T
+#### Bias-instability, scale to sigma0 in mid T(https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process)
 taus_ou = np.logspace(-1, 4, 6)             
 bias_flick = np.zeros(Npts)
 for tau_i in taus_ou:
@@ -49,7 +49,7 @@ for tau_i in taus_ou:
     for k in range(1, Npts):
         x[k] = phi*x[k-1] + q*eps[k]
     bias_flick += x
-# normalize and scale to model flat part in the middle
+# scale to model flat part in the middle
 adev_bf = overlapping_adev(bias_flick, fs, taus)
 band_b = (taus >= 10.0) & (taus <= 300.0) & np.isfinite(adev_bf)
 scale_bf = np.nanmedian( (sigma0) / adev_bf[band_b] )
