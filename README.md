@@ -24,5 +24,5 @@ The tool is designed for navigation, GNC algorithm testing, and sensor character
 -Tested sensor outputs to ensure realistic drift, long-term instability, and noise growth behavior
 
 ## How to Run
-python examples/run_imu_simulation.py
-python examples/generate_allan_deviation.py
+python imu_script.py
+python noise_simulations.py
